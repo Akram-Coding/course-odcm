@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>oDCM - APIs 101 (Tutorial)</title>
+  <title>oDCM - Web Scraping 101 (Tutorial)</title>
     
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -785,7 +785,7 @@ hljs.initHighlightingOnLoad();
   <div class="slides">
 
 <section data-state="section" data-transition="linear" data-transition-speed="default">
-<h1>oDCM - APIs 101 (Tutorial)</h1><p>Hannes Datta</p>
+<h1>oDCM - Web Scraping 101 (Tutorial)</h1><p>Hannes Datta</p>
 
 <div class="slideContent" >
 <style>
@@ -802,18 +802,21 @@ https://support.rstudio.com/hc/en-us/articles/200486468
 <pre><code>Using virtual environment &#39;/Users/hannesdatta/.virtualenvs/r-reticulate&#39; ...
 </code></pre>
 
+<pre><code>Using virtual environment &#39;/Users/hannesdatta/.virtualenvs/r-reticulate&#39; ...
+</code></pre>
+
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
 <h3>Welcome to oDCM!</h3>
 <div class="slideContent" >
-<p>We&#39;re about to start with <strong>today&#39;s tutorial (&ldquo;API 101&rdquo;)</strong>.</p>
+<p>We&#39;re about to start with <strong>today&#39;s tutorial (&ldquo;web scraping 101&rdquo;)</strong>.</p>
 
 <ul>
-<li>If you haven&#39;t done so, open slides at <a href="https://odcm.hannesdatta.com/docs/modules/week4/">https://odcm.hannesdatta.com/docs/modules/week4/</a> (I have just uploaded them)</li>
-<li>Today&#39;s (live) code is available at <a href="https://tiu.nu/livecoding">https://tiu.nu/livecoding</a> (refresh may be needed)</li>
-<li>You can work in Google Colab throughout this class</li>
+<li>If you haven&#39;t done so, open slides at <a href="https://odcm.hannesdatta.com/docs/modules/week3/">https://odcm.hannesdatta.com/docs/modules/week3/</a></li>
+<li>Today&#39;s (live) code is available at <a href="">tiu.nu/livecoding</a> (refresh may be needed)</li>
+<li>You can use Google Colab at the beginning of this tutorial, BUT&hellip; you will have to use <strong>Jupyter Notebook on your laptops</strong> towards the end</li>
 </ul>
 
 </div>
@@ -823,86 +826,65 @@ https://support.rstudio.com/hc/en-us/articles/200486468
 <h3>Before we start</h3>
 <div class="slideContent" >
 <ul>
-<li>Tech development &amp; extra material
+<li>Recap coaching session for team activity #1
 
 <ul>
-<li>Selenium?</li>
-<li>Note there are &ldquo;advanced&rdquo; tutorials for extra code snippets</li>
+<li>explore broadly! (&ldquo;universe discovery!&rdquo;) &ndash;&gt; check challenge #1.1</li>
+<li>compare sources thoroughly &ndash;&gt; e.g., comparison table + challenge #1.2</li>
+<li>Consider example projects (e.g., overview tables, illustrations)</li>
 </ul></li>
-<li>Team projects
-
-<ul>
-<li>enthusiastic about many of your ideas</li>
-<li>get started building your prototypes</li>
-<li>still revising template for writing it up
-<br></li>
-</ul></li>
-<li>Any issues so far?</li>
-</ul>
-
-<!--
-- API authentication will be pain point - highly idiosyncratic!
--->
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Agenda</h3>
-<div class="slideContent" >
-<ul>
-<li>In-class: <a href="https://api.music-to-scrape.org/docs">https://api.music-to-scrape.org/docs</a></li>
-<li>Coaching session (challenges #2.1-#2.4)
-
-<ul>
-<li>which information to retrieve?</li>
-<li>for which seeds?</li>
-<li>at what frequency?</li>
-<li>how to process the data during the collection</li>
-</ul></li>
-<li>After class
-
-<ul>
-<li>complete tutorial yourselves</li>
-</ul></li>
+<li>Previous today&#39;s coaching session: <strong>decide</strong> which website or API to use (challenges #1.1-#1.3)</li>
+<li>Any questions so far?</li>
 </ul>
 
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>What are APIs?</h3>
+<h3>A note on my (live) tutorials</h3>
 <div class="slideContent" >
 <ul>
-<li>APIs are connectors within and between platforms and databases, using the web to talk to each other
+<li>Core material is the (Jupyter Notebook) tutorial of the week</li>
+<li>It&#39;s <em>written</em> and illustrated with screenshots &ndash; it gives you all of the necessary information and you can do it at your own time after class.</li>
+<li><p>IN CLASS, my ambition is to <em>preview selected</em> issues </p>
 
 <ul>
-<li>backend to frontend: e.g., database &lt;-&gt; Reddit API &lt;-&gt; website</li>
-<li>backend to backend: e.g., Twitter &lt;-&gt; Twitter API &lt;-&gt; some trading software</li>
+<li>do you feel comfortable w/ code: then write code with me and try it out!</li>
+<li>if you struggle to code: follow the lecture and <em>see me code</em>. Understand concepts, take notes. Then, spend more time on tutorial after class</li>
+<li>if you get lost throughout: stop coding, understand concepts.</li>
 </ul></li>
-<li>Initially made available for developers, later for researchers (e.g., OpenAI&#39;s API)</li>
-<li>Available usually only after registration and approval</li>
+<li><p>Recordings of these sessions posted on Canvas (non-public)</p></li>
 </ul>
+
+<p><strong>I hope this helps.</strong></p>
 
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>Technical differences between APIs and web scraping</h3>
+<h3>Framework</h3>
+<div class="mediaInline slideContent" >
+<p><img src="https://journals.sagepub.com/na101/home/literatum/publisher/sage/journals/content/jmxa/2022/jmxa_86_5/00222429221100750/20220801/images/large/10.1177_00222429221100750-fig2.jpeg" alt=""/></p>
+
+<p>Today: zooming in more on <strong>collection design</strong></p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Recap from last week&#x27;s tutorial</h3>
 <div class="slideContent" >
 <ul>
-<li>Web scraping
+<li>We focused on which <strong>information to extract</strong> (Challenge #2.1)
 
 <ul>
-<li>not always 100% clear whether allowed</li>
-<li>have to structure (unstructured) HTML code
-<br></li>
+<li>e.g., explore a website, navigate broadly to find information that&#39;s interesting, etc.</li>
 </ul></li>
-<li>API
+<li>We focused on <strong>how to extract</strong> that information
 
 <ul>
-<li>good if you have permission (but, be realistic about getting access!)</li>
-<li><em>structured</em> JSON data</li>
+<li>BeautifulSoup: <code>.find()</code> and <code>.find_all()</code> functions</li>
+<li>Use (a combination of) tags, classes, attributes, attribute-value pairs</li>
 </ul></li>
 </ul>
 
@@ -910,336 +892,785 @@ https://support.rstudio.com/hc/en-us/articles/200486468
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>Discovering an API documentation</h3>
-<div class="slideContent" >
-<ul>
-<li>Probably the most difficult part w/ APIs is to get authenticated
-
-<ul>
-<li>recall: need platform&#39;s permission (but this API doesn&#39;t require authentication)</li>
-</ul></li>
-<li>Find an endpoint (aka page)</li>
-<li>Let&#39;s explore the documentation of&hellip; <a href="https://platform.openai.com/docs/introduction">OpenAI</a>!
-
-<ul>
-<li>which endpoints are available?</li>
-<li>what could you do with them?</li>
-</ul></li>
-</ul>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Do: Zooming in on Music-to-scrape&#x27;s API</h3>
-<div class="slideContent" >
-<p><strong>Browse</strong> the <a href="https://api.music-to-scrape.org/docs">documentation</a> of music-to-scrape&#39;s API.</p>
-
-<p>1) Describe which endpoints are available. What do they allow you to do?</p>
-
-<p>2) Can you come up with reasons why these endpoints are available? &ldquo;Why has the API been created&rdquo; (other than for this class&hellip;)</p>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Do: Making a connection with an API</h3>
+<h3>DO: Recap from last week&#x27;s tutorial</h3>
 <div class="slideContent small-code" >
-<p>Run the snippet below.</p>
+<p><strong>Extend the code snippet below to extract the release year of the song below.</strong></p>
 
 <pre><code class="python">import requests
-url = &quot;https://api.music-to-scrape.org/users&quot;
-response = requests.get(url)
-request = response.json()
-print(request)
+from bs4 import BeautifulSoup
+url = &#39;https://music-to-scrape.org/song?song-id=SOJZTXJ12AB01845FB&#39;
+request = requests.get(url, headers =  {&#39;User-agent&#39;: &#39;Mozilla/5.0&#39;})
+song_page = BeautifulSoup(request.text)
+about = song_page.find(class_=&#39;about_artist&#39;)
+title = about.find(&#39;p&#39;)
 </code></pre>
-
-<ol>
-<li>Can you explain what happens when you run this cell?</li>
-<li>Try adding the limit parameter (<code>?limit=20</code>) and run again. What happens?</li>
-</ol>
 
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>How can we make sense of JSON data?</h3>
-<div class="slideContent" >
+<h3>DO: Solution</h3>
+<div class="slideContent small-code" >
 <ul>
-<li>JSON data is structured in a hierarchy
+<li>Use the browser&#39;s <strong>inspect</strong> mode to find the relevant attributes</li>
+<li>Consecutively develop the code step-by-step, &ldquo;onion&rdquo;-like</li>
+</ul>
+
+<pre><code class="python">about.find_all(&#39;p&#39;)
+</code></pre>
+
+<pre><code>[&lt;p&gt;China&lt;/p&gt;, &lt;p&gt;Tito Puente&lt;/p&gt;, &lt;p&gt;1972&lt;/p&gt;, &lt;p&gt;184&lt;/p&gt;]
+</code></pre>
+
+<pre><code class="python">year=about.find_all(&#39;p&#39;)[3].get_text()
+</code></pre>
+
+<p><strong>Recommendations:</strong></p>
 
 <ul>
-<li>use <a href="http://jsonviewer.stack.hu">JSONviewer.stack.hu</a> to make sense of it</li>
-<li>alternatively, write to <code>.json</code> file and view in VS Code</li>
-<li>many other possibilities exist (e.g., in-browser) - check what you like best!</li>
+<li>Practice even more, e.g., with <strong>new information</strong> that you haven&#39;t extracted before from this and other sections of the website.</li>
+<li>Always build code <strong>gradually</strong>, <strong>never</strong> from scratch</li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>DO: After-class exercise from last week</h3>
+<div class="slideContent small-code" >
+<p>Any issues you&#39;ve run into?</p>
+
+<p><strong>Bonus point</strong> for a student that</p>
+
+<ul>
+<li>adds solution to Jupyter Notebook from last week using GitHub</li>
+<li>records a video tutorial with the solution</li>
+</ul>
+
+<p>Let me know if you&#39;re interested.</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Today&#x27;s focus</h3>
+<div class="slideContent" >
+<p><strong>Remaining challenges for the &ldquo;design&rdquo; phase of collecting data.</strong></p>
+
+<ul>
+<li>How to sample from a website? (Challenge #2.2)
+
+<ul>
+<li>Recall that we do not have access to a firm&#39;s database (so we can&#39;t sample from a population of, say, users)</li>
+<li>With web scraping, we always need a &ldquo;starting point&rdquo; for a data collection</li>
+</ul></li>
+<li>Examples for seeds/sample
+
+<ul>
+<li>list of recently active users (music-to-scrape.org)</li>
+<li>home page of Twitch (for currently active live streams)
+<br></li>
 </ul></li>
 </ul>
 
-<p><strong>DO:</strong> Run this snippet to write JSON output to a file! Inspect it using <a href="http://jsonviewer.stack.hu">JSONviewer</a> or VS Code!</p>
+</div>
 
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>DO: Starting up a data collection for your own project</h3>
+<div class="slideContent" >
+<p><strong>Using your own project ideas</strong>, tell us how you could <strong>sample</strong> from the site?</p>
+
+<p><br>
+<br></p>
+
+<p>Tips:</p>
+
+<ul>
+<li>Make use of the best practices for Challenge #2.2 in <a href="https://journals.sagepub.com/doi/full/10.1177/00222429221100750?journalCode=jmxa#table3-00222429221100750">Table 3</a></li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Sampling users</h3>
+<div class="slideContent small-code" >
+<p>For today&#39;s tutorial, we will be sampling users from the main website of music-to-scrape.org</p>
+
+<p><strong>Can you propose a strategy to capture them?</strong> Any attributes/classes you see? </p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>DO: Extract all links</h3>
+<div class="slideContent small-code" >
+<p><strong>Please use the code snippet below to extract the &#39;href&#39; attribute of all links on the website.</strong></p>
+
+<ul>
+<li>Links are identifiable by the &ldquo;a&rdquo; tag. </li>
+<li>The relevant attribute is called &ldquo;href&rdquo;</li>
+<li>Build your code consecutively!</li>
+</ul>
+
+<pre><code class="python">url = &#39;https://music-to-scrape.org&#39;
+
+res = requests.get(url)
+res.encoding = res.apparent_encoding
+
+homepage = BeautifulSoup(res.text)
+
+# continue here
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Solution: Extract all links</h3>
+<div class="slideContent" >
+<pre><code class="python">for link in homepage.find_all(&quot;a&quot;):
+    if &#39;href&#39; in link.attrs: 
+        print(link.attrs[&quot;href&quot;])
+</code></pre>
+
+<pre><code>/privacy_terms
+/privacy_terms
+about
+/
+/
+/tutorial_scraping
+/tutorial_api
+#
+https://api.music-to-scrape.org/docs
+/about
+song?song-id=SOBAAER12A8C13A83C
+song?song-id=SOLANWU12A8C141D4D
+song?song-id=SOSTZFN12AC468E3F1
+song?song-id=SOMOHEI12AB018785F
+song?song-id=SONGITI12AF72A2AF5
+song?song-id=SOUQADA12AB0184E60
+song?song-id=SOZPTVU12A6D4F8B4D
+song?song-id=SOPWUQH12A58A7E5E3
+song?song-id=SOTNAWQ12AB01870F4
+song?song-id=SOJQTNZ12AB018115B
+song?song-id=SOJZTXJ12AB01845FB
+song?song-id=SOZKQWY12A6D4FA5E6
+song?song-id=SOGXHEG12AB018653E
+song?song-id=SOQVMXR12A81C21483
+song?song-id=SODRPTE12A58A7BE10
+song?song-id=SOBVAPJ12AB018739D
+song?song-id=SOECLAD12AAF3B120A
+song?song-id=SORJVDO12AF72A1970
+song?song-id=SOLIQRN12A8C1391A6
+song?song-id=SOAYRZU12A8C133EBD
+song?song-id=SOQVVDQ12AB018300C
+song?song-id=SOQQVIP12A8C13E7E6
+song?song-id=SOCDLSK12AB018168E
+song?song-id=SONLBRH12A6D4FBAEE
+song?song-id=SOMCTKM12A8C138B86
+artist?artist-id=ARQFPFK1187FB533E1
+artist?artist-id=ARAVPU21187B993957
+artist?artist-id=AR2TT8P1187B9B624D
+artist?artist-id=AREFUMW11F4C844D2B
+artist?artist-id=ARMBTFC1187FB56343
+artist?artist-id=ARCQCYR1187B99367F
+artist?artist-id=AR7SVRP1187FB55875
+artist?artist-id=ARYFAT91187B99FEF5
+user?username=Vector06
+user?username=NinjaStar81
+user?username=StarVector67
+user?username=RocketDragon14
+user?username=PixelPanda50
+user?username=Coder43
+/tutorial_scraping
+/tutorial_api
+https://api.music-to-scrape.org/docs
+/about
+/privacy_terms
+https://www.linkedin.com/company/tilburgsciencehub
+https://github.com/tilburgsciencehub/music-to-scrape
+https://twitter.com/tilburgscience
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Solution: Extract all links</h3>
+<div class="slideContent" >
+<ul>
+<li>But&hellip; are all of these links really relevant?</li>
+<li>Recall: what &ldquo;seeds&rdquo; do we need to gather?</li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Narrowing down our extraction</h3>
+<div class="slideContent" >
+<ul>
+<li>Let us explore the site structure a bit more</li>
+<li>Particularly, can we identify other ways to navigate on the site?</li>
+<li>Remember, your strategy can be a &ldquo;multi-step&rdquo; strategy (first to A, then within A to B)!</li>
+<li><strong>Let&#39;s open the inspect mode of our browser and come up with an updated strategy.</strong></li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>DO: Narrowing down our extraction</h3>
+<div class="slideContent" >
+<ul>
+<li>The relevant links all reside in the <code>recent_users</code> section, starting with <code>&lt;section</code>&gt;</li>
+</ul>
+
+<pre><code class="python">relevant_section = homepage.find(&#39;section&#39;,attrs={&#39;name&#39;:&#39;recent_users&#39;})
+</code></pre>
+
+<p><strong>DO:</strong> Can you come up with a way to loop through all of the links WITHIN <code>relevant_section</code> and store them?</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Solution: Narrowing down our extraction</h3>
+<div class="slideContent small-code" >
+<pre><code class="python">users = []
+for link in relevant_section.find_all(&quot;a&quot;):
+  if (&#39;href&#39; in link.attrs):
+      users.append(link.attrs[&#39;href&#39;])
+users
+</code></pre>
+
+<pre><code>[&#39;user?username=Vector06&#39;, &#39;user?username=NinjaStar81&#39;, &#39;user?username=StarVector67&#39;, &#39;user?username=RocketDragon14&#39;, &#39;user?username=PixelPanda50&#39;, &#39;user?username=Coder43&#39;]
+</code></pre>
+
+<ul>
+<li>Let&#39;s now take a look at these links more closely. </li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Modifying the links</h3>
+<div class="slideContent small-code" >
+<ul>
+<li>Notice that the links were <em>relative</em> links and we won&#39;t be able to use them for looping (e.g., try pasting them in your browser - they won&#39;t work!)</li>
+<li>So, let&#39;s turn them into absolute links, simply by concatenating (= combining) strings.</li>
+</ul>
+
+<pre><code class="python">urls = []
+for link in relevant_section.find_all(&quot;a&quot;):
+    if &#39;href&#39; in link.attrs: 
+        extracted_link = link.attrs[&#39;href&#39;]
+        urls.append(f&#39;https://music-to-scrape.org/{extracted_link}&#39;)
+urls
+</code></pre>
+
+<pre><code>[&#39;https://music-to-scrape.org/user?username=Vector06&#39;, &#39;https://music-to-scrape.org/user?username=NinjaStar81&#39;, &#39;https://music-to-scrape.org/user?username=StarVector67&#39;, &#39;https://music-to-scrape.org/user?username=RocketDragon14&#39;, &#39;https://music-to-scrape.org/user?username=PixelPanda50&#39;, &#39;https://music-to-scrape.org/user?username=Coder43&#39;]
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>DO: Remember functions?</h3>
+<div class="slideContent" >
+<p>Write a function that&hellip;</p>
+
+<ul>
+<li>makes a web request to <a href="https://music-to-scrape.org">https://music-to-scrape.org</a></li>
+<li>extract all links to the user pages and returns them back (<code>return()</code>)</li>
+</ul>
+
+<p><strong>Do you remember why we like functions so much?</strong></p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Solution</h3>
+<div class="slideContent small-code" >
+<pre><code class="python">import requests
+from bs4 import BeautifulSoup
+
+def get_users():
+    url = &#39;https://music-to-scrape.org/&#39;
+
+    res = requests.get(url)
+    res.encoding = res.apparent_encoding
+
+    soup = BeautifulSoup(res.text)
+
+    relevant_section = soup.find(&#39;section&#39;,attrs={&#39;name&#39;:&#39;recent_users&#39;})
+
+    links = []
+    for link in relevant_section.find_all(&quot;a&quot;):
+        if &#39;href&#39; in link.attrs: 
+            extracted_link = link.attrs[&#39;href&#39;]
+            links.append(f&#39;https://music-to-scrape.org/{extracted_link}&#39;)
+    return(links) # to return all links
+
+# let&#39;s try it out
+# users = get_users() 
+</code></pre>
+
+<ul>
+<li>Functions allow us to <strong>re-use code</strong>; it prevents errors, and helps us structure our code.</li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>JSON data</h3>
+<div class="slideContent" >
+<ul>
+<li>For now, the data is just in memory.</li>
+<li>But, we can also save it!</li>
+<li>For this, we <em>store</em> the data as JSON objects/dictionaries</li>
+<li>Use <code>json.dumps</code> to convert JSON to text (and then save it)</li>
+<li>Use <code>json.loads</code> to convert text to JSON (and then use it)</li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Example: JSON data</h3>
+<div class="slideContent small-code" >
 <pre><code class="python">import json
-f=open(&#39;users.json&#39;, &#39;w&#39;, encoding=&#39;utf-8&#39;)
-f.write(json.dumps(request))
+
+users = get_users()
+# build JSON dictionary
+f = open(&#39;users.json&#39;,&#39;w&#39;)
+for user in users:
+  obj = {&#39;url&#39;: user,
+         &#39;username&#39;: user.replace(&#39;https://music-to-scrape.org/user?username=&#39;,&#39;&#39;)}
+  f.write(json.dumps(obj))
+  f.write(&#39;\n&#39;)
+</code></pre>
+
+<pre><code>85
+1
+91
+1
+93
+1
+97
+1
+93
+1
+83
+1
+</code></pre>
+
+<pre><code class="python">f.close()
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Preventing array misalignment</h3>
+<div class="slideContent" >
+<ul>
+<li>When extracting web data, it&#39;s important to extract information in its &ldquo;original&rdquo; (nested) structure</li>
+<li>For example, hover around the user names and observe the song names that pop up.</li>
+<li>If you were to extract this information <strong>separately</strong>, you wouldn&#39;t be able to know <strong>which one relates to which user</strong>.</li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Demonstration</h3>
+<div class="slideContent small-code" >
+<pre><code class="python">links = []
+for link in relevant_section.find_all(&quot;a&quot;):
+    if &#39;href&#39; in link.attrs: 
+        extracted_link = link.attrs[&#39;href&#39;]
+        links.append(f&#39;https://music-to-scrape.org/{extracted_link}&#39;)
+
+# getting songs
+songs = []
+for song in relevant_section.find_all(&quot;span&quot;):
+    songs.append(song.get_text())
+
+len(links)
+</code></pre>
+
+<pre><code>6
+</code></pre>
+
+<pre><code class="python">len(songs)
+</code></pre>
+
+<pre><code>5
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>DO: Preventing array misalignment</h3>
+<div class="slideContent small-code" >
+<p>Which solutions do you see &ndash; by iterating differently through the source code &ndash; to prevent array misalignment?</p>
+
+<p>Tip: Observe how we can first iterate through users, THEN extract links (similar to how we have done it with <code>relevant_section</code>).</p>
+
+<pre><code class="python">users = relevant_section.find_all(class_=&#39;mobile-user-margin&#39;)
+data = []
+for user in users: # iterate through each user
+  obj = {&#39;link&#39;:user.find(&#39;a&#39;).attrs[&#39;href&#39;]  }
+  data.append(obj)
+data
+</code></pre>
+
+<pre><code>[{&#39;link&#39;: &#39;user?username=Vector06&#39;}, {&#39;link&#39;: &#39;user?username=NinjaStar81&#39;}, {&#39;link&#39;: &#39;user?username=StarVector67&#39;}, {&#39;link&#39;: &#39;user?username=RocketDragon14&#39;}, {&#39;link&#39;: &#39;user?username=PixelPanda50&#39;}, {&#39;link&#39;: &#39;user?username=Coder43&#39;}]
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Solution</h3>
+<div class="slideContent small-code" >
+<pre><code class="python">users = relevant_section.find_all(class_=&#39;mobile-user-margin&#39;)
+data = []
+for user in users:
+  if user.find(&#39;span&#39;) is not None:
+    song_name=user.find(&#39;span&#39;).get_text()
+  else:
+    song_name=&#39;NA&#39;
+  obj = {&#39;link&#39;:user.find(&#39;a&#39;).attrs[&#39;href&#39;],
+         &#39;song_name&#39;: song_name}
+
+  data.append(obj)
+data
+</code></pre>
+
+<pre><code>[{&#39;link&#39;: &#39;user?username=Vector06&#39;, &#39;song_name&#39;: &#39;X-ecutioners - Play That Beat&#39;}, {&#39;link&#39;: &#39;user?username=NinjaStar81&#39;, &#39;song_name&#39;: &#39;NA&#39;}, {&#39;link&#39;: &#39;user?username=StarVector67&#39;, &#39;song_name&#39;: &#39;Rance Allen Group - The Painter&#39;}, {&#39;link&#39;: &#39;user?username=RocketDragon14&#39;, &#39;song_name&#39;: &#39;[kaleidoskop] - deine liebe&#39;}, {&#39;link&#39;: &#39;user?username=PixelPanda50&#39;, &#39;song_name&#39;: &#39;Mobb Deep - (The Grave Prelude)&#39;}, {&#39;link&#39;: &#39;user?username=Coder43&#39;, &#39;song_name&#39;: &#39;Cali - Dolorosa (Live)&#39;}]
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Let&#x27;s take a step back...</h3>
+<div class="slideContent" >
+<ul>
+<li><p>What we&#39;ve learnt so far&hellip;</p>
+
+<ul>
+<li>Extract individual information from a website, e.g., the homepage of music-to-scrape (ch. #2.1)</li>
+<li>Collect all links to user profiles from the homepage (ch. #2.2)</li>
+</ul></li>
+<li><p>What&#39;s missing</p>
+
+<ul>
+<li>VISIT each fo the profile pages</li>
+<li>Loop through them</li>
+</ul></li>
+<li><p>We can then tie things together in a scraper</p>
+
+<ul>
+<li>&ldquo;collect&rdquo; all user seeds (scraper 1)</li>
+<li>then collect all consumption data from individual user pages (scraper 2)</li>
+</ul></li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Navigating on a website</h3>
+<div class="slideContent small-code" >
+<ul>
+<li>Two strategies
+
+<ul>
+<li>Understand how links are built (prebuilding them; strategy 1)</li>
+<li>Understand how to &ldquo;click&rdquo; to the next/previous page (consecutively building them; strategy 2)</li>
+</ul></li>
+</ul>
+
+<pre><code class="python">urls = []
+counter = 37
+while counter &gt;= 0:
+  urls.append(f&#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week={counter}&#39;)
+  counter = counter - 1
+urls
+</code></pre>
+
+<pre><code>[&#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=37&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=36&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=35&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=34&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=33&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=32&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=31&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=30&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=29&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=28&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=27&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=26&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=25&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=24&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=23&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=22&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=21&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=20&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=19&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=18&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=17&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=16&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=15&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=14&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=13&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=12&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=11&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=10&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=9&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=8&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=7&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=6&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=5&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=4&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=3&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=2&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=1&#39;, &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=0&#39;]
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>DO: Navigating on a Website (strategy 2)</h3>
+<div class="slideContent small-code" >
+<p><strong>Run the code below. How to extend the code to extract the LINK of the previous button?</strong></p>
+
+<pre><code class="python">url = &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=36&#39;
+header = {&#39;User-agent&#39;: &#39;Mozilla/5.0&#39;}
+res = requests.get(url, headers = header)
+res.encoding = res.apparent_encoding
+userpage = BeautifulSoup(res.text)
+button=userpage.find(class_=&#39;page-link&#39;, attrs={&#39;type&#39;:&#39;previous_page&#39;})
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Solution</h3>
+<div class="slideContent" >
+<pre><code class="python">button.attrs[&#39;href&#39;]
+</code></pre>
+
+<pre><code>&#39;user?username=StarCoder49&amp;week=35&#39;
+</code></pre>
+
+<p><strong>DISCUSS:</strong> When do we use strategy 1 (prebuilt) vs. strategy 2 (do it on the fly)?</p>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Let&#x27;s tie things together</h3>
+<div class="slideContent small-code" >
+<ul>
+<li>We now have a function <code>get_users()</code> to retrieve user names</li>
+<li>We also know how to &ldquo;find&rdquo; the next link to visit (a user&#39;s previous page)</li>
+<li>How can we now visit ALL pages, for ALL users?</li>
+<li>Let&#39;s take a look at some pseudo code!</li>
+</ul>
+
+<pre><code>users = get_users()
+
+consumption_data = []
+
+for user in users:
+  url = user[&#39;url&#39;]
+
+  while url is not None:
+    # scrape information from URL # challenge #2.1, #2.4
+    # determine &quot;previous page&quot;
+    time.sleep(1) # challenge #2.3
+
+    # if previous page exists: rerun loop on next URL
+    # if previous page does not exist: stop while loop, go to next 
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Challenge #2.3: At which frequency to extract the data?</h3>
+<div class="slideContent" >
+<ul>
+<li>We can decide how often to capture information from a site
+
+<ul>
+<li>e.g., once, every 5 minutes, every day</li>
+</ul></li>
+<li>Potential gains in extracting data multiple times</li>
+<li>Extraction limits &amp; <strong>technically feasible sample size!</strong></li>
+<li>More issues explained in table 3, challenge #2.3</li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Challenge #2.4: How to process data during collection</h3>
+<div class="slideContent" >
+<ul>
+<li>value of retaining raw data</li>
+</ul>
+
+<pre><code># pseudo code!
+product_data = []
+for s in seeds:
+  # store raw html code here
+  store_to_file(s, &#39;website.html&#39;)
+  # continue w/ parsing some information
+  product = get_product_info(s)
+  product_data.append(product)
+
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Challenge #2.4: How to process data during collection</h3>
+<div class="slideContent" >
+<ul>
+<li>parsing data on the fly (vs. after the collection)</li>
+</ul>
+
+<pre><code># pseudo code!
+
+product_data = []
+for s in seeds:
+  product = get_product_info(s) 
+  product_updated = processing(product)
+  time.sleep(1) 
+  product_data.append(product_updated) 
+  # write data to file here (parsing on the fly!!!)
+
+# write data to file here (after the collection - avoid!)
+
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Extract consumption data</h3>
+<div class="slideContent" >
+<p>We still need to extract the consumption data from a user&#39;s profile page.</p>
+
+<p>Let&#39;s start with the snippet below.</p>
+
+<pre><code class="python">url = &#39;https://music-to-scrape.org/user?username=StarCoder49&amp;week=10&#39;
+soup = BeautifulSoup(requests.get(url).text)
+</code></pre>
+
+<p>Can you propose:</p>
+
+<ul>
+<li>how to find the table?</li>
+<li>how to iterate through each row?</li>
+<li>how to save the information as a JSON dictionary</li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Scraping more advanced websites</h3>
+<div class="slideContent small-code" >
+<ul>
+<li class="fragment"><p>So far, we have done this</p>
+
+<ul>
+<li class="fragment"><code>requests</code> (to get) &ndash;&gt; <code>beautifulsoup</code> (to extract information, &ldquo;parse&rdquo;)</li>
+</ul></li>
+<li class="fragment"><p class="fragment"><strong>DO:</strong> Run the snippet below and open <code>amazon.html</code>  </p></li>
+</ul>
+
+<pre class="fragment"><code class="python">import requests
+header = 
+f = open(&#39;amazon.html&#39;, &#39;w&#39;, encoding = &#39;utf-8&#39;)
+f.write(requests.get(&#39;https://amazon.com&#39;, headers =  {&#39;User-agent&#39;: &#39;Mozilla/5.0&#39;}).text)
 f.close()
 </code></pre>
 
+<p class="fragment"><strong>Can you explain what happened?</strong></p>
+
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>Getting data from a JSON dictionary</h3>
+<h3>Alternative ways to make connections</h3>
 <div class="slideContent small-code" >
 <ul>
-<li>Let&#39;s try to only extract a list of user names, rather than the entire dictionary.</li>
-<li>For this, we need to know how to access nodes of a dictionary.
+<li><p>Many dynamic sites require what I call &ldquo;simulated browsing&rdquo;</p></li>
+<li><p>Try this:</p></li>
+</ul>
+
+<pre><code class="python">!pip install webdriver_manager
+!pip install selenium
+
+# Using selenium 4 - ensure you have Chrome installed!
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+
+url = &quot;https://amazon.com/&quot; # remember to solve captchas
+driver.get(url)
+</code></pre>
 
 <ul>
-<li><code>[&#39;name_of_attribute&#39;]</code></li>
-<li><code>.get(&#39;name_of_attribute&#39;)</code></li>
+<li><strong>See your browser opening up?</strong></li>
+<li>Beware of rerunning code - a new instance will run each time!</li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Continuing with beautifulsoup</h3>
+<div class="slideContent" >
+<ul>
+<li>We can convert the site&#39;s source code (<code>page_source</code>) to <code>BeautifulSoup</code>, and proceed as always</li>
+</ul>
+
+<pre><code class="python">from bs4 import BeautifulSoup
+soup = BeautifulSoup(driver.page_source)
+
+for el in soup.find_all(class_ = &#39;a-section&#39;):
+    title = el.find(&#39;h2&#39;)
+    if title is not None: print(title.text)
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Different ways to open a site</h3>
+<div class="slideContent" >
+<ul>
+<li>Static/easy site: use <code>requests</code>
+
+<ul>
+<li><code>requests</code> &ndash;&gt; <code>BeautifulSoup</code> &ndash;&gt; <code>.find()</code></li>
 </ul></li>
-<li>Do: Let&#39;s try it out</li>
-</ul>
-
-<pre><code class="python">request[&#39;limit&#39;]
-
-# or: 
-
-request.get(&#39;limit&#39;)
-</code></pre>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Do: Getting user names</h3>
-<div class="slideContent" >
-<ol>
-<li>How would you have to modify the snippet below to access the list of user names?</li>
-<li>Can you write a loop that extracts user names and puts them to a new list?</li>
-</ol>
-
-<pre><code class="python">request[&#39;limit&#39;] # this one worked for extracting the value for limit...
-</code></pre>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Do: Anonymizing data</h3>
-<div class="slideContent" >
-<p>Suppose we do not want to extract the ages and country names for the users&hellip;</p>
-
-<p><strong>Can you come up with a way to anonymize them (e.g., overwrite them with NA), while keeping the rest of the dictionary intact?</strong></p>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Difference between `.append()` and `.extend()`</h3>
-<div class="slideContent small-code" >
-<ul>
-<li><code>.append()</code> &ldquo;adds&rdquo; one item at a time to an existing list</li>
-</ul>
-
-<pre><code class="python">users = [] # empty list
-users.append(&#39;another user&#39;)
-users.append(&#39;yet another user&#39;)
-users
-</code></pre>
+<li>Dynamic/difficult site: also use <code>selenium</code>
 
 <ul>
-<li><code>extend()</code> adds multiple items to an existing list</li>
-</ul>
-
-<pre><code class="python">users = []
-new_users = [&#39;another user&#39;,&#39;yet another user&#39;]
-users.extend(new_users)
-users
-</code></pre>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Understanding parameters in API calls</h3>
-<div class="slideContent" >
-<ul>
-<li>APIs are useful because you can <em>modify</em> its search results
-
-<ul>
-<li>say, you want to see the next batch of users (when listing users), or </li>
-<li>search for a particular thing (when searching via the API)</li>
-</ul></li>
-<li>Many ways to &ldquo;submit&rdquo; parameters to an API
-
-<ul>
-<li>directly in URL, e.g., <code>myapi.com/search/cats_and_dogs</code> [not the case for music to scrape]</li>
-<li>w/ parameters in URL, e.g., <code>myapi.com/search/?query=cats_and_dogs</code> </li>
-<li>in <strong>header</strong> of request (think of it like the address [=header] on an envelop [=data])</li>
+<li><code>selenium</code> &ndash;&gt; wait &ndash;&gt; <code>BeautifulSoup</code> &ndash;&gt; <code>.find()</code></li>
 </ul></li>
 </ul>
 
-<p><br><br></p>
-
-<p><strong>The API documentation will tell you what is required!</strong></p>
-
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>Example: submitting parameters in the header via the `params` argument</h3>
+<h3>Next steps</h3>
 <div class="slideContent" >
 <ul>
-<li><code>params</code> requires to be a dictionary with the parameter names and corresponding values</li>
-</ul>
-
-<pre><code class="python">import requests
-url = &quot;https://api.music-to-scrape.org/users&quot;
-response = requests.get(url, params = {&#39;limit&#39;: 15})
-request = response.json()
-print(request)
-</code></pre>
-
-<p>Can you <strong>speculate about the benefits</strong> of submitting parameters in the header (<code>params</code>) rather than in the URL?</p>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Do: Iterating through API endpoints</h3>
-<div class="slideContent small-code" >
-<ul>
-<li>Remember iterating through pages on a website to &ldquo;view&rdquo; data? APIs know the same concept!</li>
-</ul>
-
-<ol>
-<li>Try to add the <code>offset</code> parameter to the snippet below. What happens when you set it to <code>1</code>? What happens when you set it to <code>5</code>?</li>
-<li>To which value would you have to set it to see the next batch of users?</li>
-</ol>
-
-<pre><code class="python"># start with this code
-import requests
-url = &quot;https://api.music-to-scrape.org/users?limit=10&quot;
-response = requests.get(url)
-request = response.json()
-print(request)
-</code></pre>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Do: Let&#x27;s wrap your code in a function</h3>
-<div class="slideContent" >
-<ol>
-<li>Construct a function, called <code>get_users()</code>, with parameters <code>limit</code> and <code>offset</code>, returning the dictionary of users from the API endpoint <code>/users</code>.</li>
-</ol>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Looping through all result pages of an endpoint</h3>
-<div class="slideContent" >
-<ul>
-<li>Let&#39;s try to construct a loop that repeatedly fetches user names.</li>
-<li>Let us first use a <code>for</code> loop.</li>
-</ul>
-
-<pre><code class="python">for x in range(6):
-  print(x)
-</code></pre>
-
-<p><strong>Do:</strong> Modify the snippet below so that it calls <code>get_users()</code> 10 times, incrementing the offset by 10 at each iteration.</p>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>For loop vs. while loop</h3>
-<div class="slideContent small-code" >
-<ul>
-<li>Difference between for <code>for</code> loops (you usually know beforehand when to stop), and <code>while</code> loops (the ending point can change, say when &ldquo;there is no new data coming in&rdquo;)</li>
-</ul>
-
-<pre><code class="python"># for loop
-for x in range(6):
-  print(x)
-</code></pre>
-
-<pre><code class="python">cntr = 0
-while cntr &lt; 6:
-  print(cntr)
-  cntr = cntr+1
-</code></pre>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Tying everything together</h3>
-<div class="slideContent" >
-<p>We can now combine our learnings to build a function that extracts all user names to new-line separated JSON files.</p>
+<li>Focus on self-study material</li>
+<li>Today&#39;s coaching session&hellip;!
 
 <ul>
-<li>Implement it step-by-step</li>
-<li>Also load packages!</li>
-<li>Save as <code>.py</code> file and test whether it runs from command prompt/terminal</li>
-</ul>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Solution: </h3>
-<div class="slideContent small-code" >
-<pre><code class="python"># will develop in class
-</code></pre>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Do: Onwards to more endpoints</h3>
-<div class="slideContent small-code" >
-<p>The tutorial proceeds by introducing a series of additional endpoints.</p>
-
-<ul>
-<li><a href="https://api.music-to-scrape.org/docs#operation/get_total_plays_for_username_user_plays_get"><code>user/plays</code></a> - get a user&#39;s total number of plays</li>
-<li><a href="https://api.music-to-scrape.org/docs#operation/chart_get_top_artists_charts_top_artists_get"><code>charts/top-artists</code></a> - see a list of top-performing artist for this week (and previous weeks)</li>
-</ul>
-
-<ol>
-<li>Try fetching data from <code>user/plays</code>, following the guidelines in the documentation. Do you succeed?</li>
-<li>Now do the same for <code>charts/top-artists</code>. Do you get some output?</li>
-</ol>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Let&#x27;s extract several of these weekly charts</h3>
-<div class="slideContent" >
-<pre><code class="python"># code in class
-</code></pre>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>Reflection</h3>
-<div class="slideContent" >
-<ul>
-<li>wow - no &ldquo;structuring&rdquo; of HTML &ldquo;soup&rdquo; (THAT&#39;s the key difference compared to web scraping)</li>
-<li>Spend time trying to get your first data from an API &ndash; authentication <strong>will</strong> be an issue!</li>
-<li>Time left? We could also go over some <a href="https://htmlpreview.github.io/?https://github.com/hannesdatta/legal-situation-of-web-scraping/blob/main/legal-status-of-web-scraping.html#/title-slide">legal issues</a></li>
-<li>After this class: coaching session (focus on <a href="https://odcm.hannesdatta.com/docs/project/workplan/activity3/">activity #3</a>)</li>
-<li>Next week
-
-<ul>
-<li>presentations about your projects</li>
-<li>afterwards: coaching (get your prototype up and running!)</li>
+<li>settle on extraction design (challenges #1.1-1.3) </li>
+<li>get started w/ <strong>prototyping data extraction</strong></li>
+<li>consider <code>selenium</code> and APIs (see next tutorials)</li>
 </ul></li>
+</ul>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Thanks!</h3>
+<div class="slideContent" >
+<ul>
+<li>Any questions?</li>
+<li>Be in touch for feedback via WhatsApp.</li>
 </ul>
 
 </div>
@@ -1249,20 +1680,14 @@ while cntr &lt; 6:
 <h3>Coaching session</h3>
 <div class="slideContent" >
 <ul>
-<li>Coaching session (challenges #2.1-#2.4)
+<li>Decide which website or API to use (challenges #1.1-#1.3)</li>
+<li>Instructions, see: <a href="https://odcm.hannesdatta.com/docs/project/workplan/activity2/">https://odcm.hannesdatta.com/docs/project/workplan/activity2/</a></li>
+</ul>
+
+<p><br></p>
 
 <ul>
-<li>which information to retrieve?</li>
-<li>for which seeds?</li>
-<li>at what frequency?</li>
-<li>how to process the data during the collection</li>
-</ul></li>
-<li>Work on your prototypes
-
-<ul>
-<li>Selenium vs. <code>requests</code>?</li>
-<li>Getting authenticated with the API?</li>
-</ul></li>
+<li>Please actively solicit my feedback!</li>
 </ul>
 
 </div>
